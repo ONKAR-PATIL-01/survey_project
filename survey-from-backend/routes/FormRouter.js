@@ -1,9 +1,10 @@
 var router = require('express').Router()
-const { createForm, formsGet, getFormByEmail, allResponses, submitResponse, getResponse, getAllFormsOfUser } = require('../services/FormService.js')
+const { createForm,getFormById, formsGet, getFormByEmail, allResponses, submitResponse, getResponse, getAllFormsOfUser } = require('../services/FormService.js')
 
 router.route("/create").post(createForm)
 router.route("/forms").get(formsGet)
 router.route("/form/:email").get(getFormByEmail)
+router.route("/form/id/:_id").get(getFormById)
 router.route("/addresponse").post(submitResponse)
 // router.route("/email/:email").get(getAllFormsOfUser)
 

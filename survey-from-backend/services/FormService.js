@@ -60,6 +60,26 @@ module.exports = {
             res.send(error)
         }
     },
+    getFormById: async (req, res) => {
+        try {
+            var id = req.params._id;
+
+            await FormModel.findOne({ _id: id }).then(async (form) => {
+                 console.log(form);
+                if (form == null) {
+                    res.status(404).send('Form not found');
+                } else {
+                    res.status(200).json(form)
+
+
+                }
+            })
+
+        } catch (error) {
+            res.send(error)
+        }
+    },
+
 
     // deleteForm: async (req, res) => {
 
