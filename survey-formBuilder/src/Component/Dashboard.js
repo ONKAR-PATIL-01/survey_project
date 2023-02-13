@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 
 import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 export const Dashboard = () => {
@@ -10,82 +9,53 @@ export const Dashboard = () => {
   const [email, setemail] = useState("");
   const [data1, setdata1] = useState("");
   const [length1, setlength1] = useState(0);
-  const [input1, setinput1] = useState({
-
-    email: "",
-  });
+  
 
   useEffect(() => {
-
-  }, [data1])
-  useEffect(() => {
-
-  }, [])
-  const handlechange = (e) => {
-    setinput1((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value
-
-    }))
-  }
-
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setemail(input1.email);
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json"
+    setemail(localStorage.getItem("email"));
+    console.log(email);
+    const abc= async()=> {
+      try {
+        const config = {
+          headers: {
+            "Content-type": "application/json"
+          }
         }
+  
+        const { data } = await axios.get(
+          `http://localhost:2000/api/form/form/${email}`, config
+  
+        );
+  
+        //  data1=JSON.stringify(data[0],null,3);
+        //  console.log(JSON.stringify(data1[0]));
+        console.log(Object.keys(data).length);
+        setlength1(Object.keys(data).length)
+        setdata1(data);
+      } catch (error) {
+  
       }
-
-      const { data } = await axios.get(
-        `http://localhost:2000/api/form/form/${email}`, config
-
-      );
-
-      //  data1=JSON.stringify(data[0],null,3);
-      //  console.log(JSON.stringify(data1[0]));
-      console.log(Object.keys(data).length);
-      setlength1(Object.keys(data).length)
-      setdata1(data);
-    } catch (error) {
-
     }
-  }
+    
+    abc();
 
+  },[email])
+  useEffect(()=>{
+
+  },[data1])
+
+  
+
+console.log("localStorage.getItem().userInfo",localStorage.getItem("userInfo"))
 
   
   return (
+    
+      localStorage.getItem("userInfo") === "Authenticated" ?
     <>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          onChange={handlechange}
-          name="email"
-          value={input1.email}
-
-          type={"email"}
-          variant="outlined"
-          placeholder="Email"
-
-        ></TextField>
-
-        <Button
-          type="submit"
-          style={{
-            borderRadius: 35,
-         
-            color:'#fff',
-            fontWeight: 'bold',
-            marginTop: '8px',
-            marginLeft: '20px'
-          }}
-          variant="contained"
-        >
-          Get Froms
-
-        </Button>
+  
+      <form >
+        
         <Button onClick={() => {
           navigate('/dnd')
         }}
@@ -96,7 +66,7 @@ export const Dashboard = () => {
               color:'#fff',
               fontWeight: 'bold',
             marginTop: '8px',
-            marginLeft: '700px',
+            marginLeft: '80%',
            
 
           }}
@@ -115,7 +85,7 @@ export const Dashboard = () => {
         (() => {
           var post = [];
           for (let i = 0; i < length1; i++) {
-            post.push(<Button variant='outlined' onClick={() => navigate(`/dynamicform/${JSON.stringify(data1[i].title)}` , { state:{id:data1[i] }})} style={{
+            post.push(<Button variant='outlined' onClick={() => navigate(`/dynamicform/${data1[i]._id}` , { state:{id:data1[i] }})} style={{
               fontWeight: 'bold',
               borderRadius: 35,
               marginTop: '50px',
@@ -128,7 +98,7 @@ export const Dashboard = () => {
       }
 
 
-    </>
+    </>:<p>Unauthorized User</p>
   )
 }
 // import React from 'react'

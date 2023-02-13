@@ -1,14 +1,44 @@
-import { TextareaAutosize, TextField, InputLabel, Button, Select } from "@mui/material";
-import React, { useState } from "react";
+import { TextareaAutosize, TextField, InputLabel, Button, Select, RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import Stack from '@mui/material/Stack';
-import { useLocation } from "react-router-dom";
+
 import axios from 'axios';
 
 
 export const DynamicFom = () => {
-    let location = useLocation()
-    var response=[];
-    const formData = location.state.id;
+    
+    var response = [];
+    const[formData,setFormData]=useState();
+    // const formData = location.state.id;
+    
+
+   useEffect(()=>{
+    const id=(window.location.href).split('/')[4];
+    const fun =async()=> {
+        try {
+            const config = {
+              headers: {
+                "Content-type": "application/json"
+              }
+            }
+      
+            const { data } = await axios.get(
+              `http://localhost:2000/api/form/form/id/${id}`, config
+      
+            );
+      
+            //  data1=JSON.stringify(data[0],null,3);
+            //  console.log(JSON.stringify(data1[0]));
+            console.log(data.surveys);
+           
+            setFormData(data);
+            console.log(data.surveys);
+          } catch (error) {
+      
+          }
+    }
+    fun();
+   },[])
     const [formState, setFormState] = useState({});
     const handleChange = event => {
         setFormState({
@@ -17,32 +47,32 @@ export const DynamicFom = () => {
         });
     };
 
-    const handleSubmit = async(event)=> {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         response.push(formState);
         console.log(response);
-        
-        try{
-            const config={
-              headers:{
-                "Content-type":"application/json"
-              }
+
+        try {
+            const config = {
+                headers: {
+                    "Content-type": "application/json"
+                }
             }
-            
-    const {data}=await axios.post(
-      "http://localhost:2000/api/form/addresponse",
-      {
-       response
-      },
-      config
-    );
-          console.log(data);
-          
-         
-        }catch(error){
-          
+
+            const { data } = await axios.post(
+                "http://localhost:2000/api/form/addresponse",
+                {
+                    response
+                },
+                config
+            );
+            console.log(data);
+
+
+        } catch (error) {
+
         }
-    
+
 
     };
     //   useEffect(()=>{
@@ -50,10 +80,10 @@ export const DynamicFom = () => {
     //   },[setFormState])
     return (
         <form style={{ alignItems: 'center', margin: 'auto', marginLeft: '40%' }} onSubmit={handleSubmit}>
-         
-            <InputLabel>Iauro's Auto Generated form {JSON.stringify(location.state.id.surveys.title)}</InputLabel>
 
-            {formData.surveys.map(field => (
+            {/* <InputLabel>Iauro's Auto Generated form {JSON.stringify(location.state.id.surveys.title)}</InputLabel> */}
+
+            {formData?.surveys?.map(field => (
                 <div key={field.label}>
                     <InputLabel htmlFor={field.label}>{field.label}</InputLabel>
                     {field.type === "text" && (
@@ -172,7 +202,7 @@ export const DynamicFom = () => {
                             {field.values.map((answer, answerIndex) => (
                                 <>
                                     <InputLabel>{answer.value}</InputLabel>
-                                    <TextField type='checkbox' ></TextField>
+                                    <TextField name={answer.value} type='checkbox' value={formState[field.label] || ""} onChange={handleChange}></TextField>
                                 </>
                             ))}
                         </InputLabel>
@@ -180,7 +210,7 @@ export const DynamicFom = () => {
                     {field.type === "radio-group" && (
 
 
-                        <InputLabel id={field.label}
+                        <RadioGroup id={field.label}
                             name={field.label}
                             onChange={handleChange}
                             value={formState[field.label] || ""}
@@ -189,10 +219,12 @@ export const DynamicFom = () => {
                             {field.values.map((answer, answerIndex) => (
                                 <>
                                     <InputLabel>{answer.value}</InputLabel>
-                                    <TextField type='Radio' ></TextField>
+                                    <FormControlLabel control={<Radio />} value={formState[field.label] || ""} onChange={handleChange} ></FormControlLabel>
                                 </>
+
                             ))}
-                        </InputLabel>
+                        </RadioGroup>
+
                     )}
                     {field.type === "select" && (
 
@@ -204,7 +236,7 @@ export const DynamicFom = () => {
                         >
 
                             {field.values.map((answer, answerIndex) => (
-                                    <InputLabel>{answer.value}</InputLabel>
+                                <InputLabel>{answer.value}</InputLabel>
                             ))}
                         </Select>
                     )}
@@ -213,7 +245,7 @@ export const DynamicFom = () => {
             <Button style={{
                 borderRadius: 35,
                 backgroundColor: "#000",
-                color:'aqua',
+                color: 'aqua',
                 fontWeight: 'bold',
                 marginTop: '20px',
                 marginLeft: '10%',

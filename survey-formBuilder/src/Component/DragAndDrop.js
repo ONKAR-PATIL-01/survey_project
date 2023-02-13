@@ -100,6 +100,7 @@ const {data}=await axios.post(
 
   }  
   return (
+    localStorage.getItem("userInfo")==="Authenticated"?
     <>
     <form style={{marginBottom:'20px'}}  onSubmit={handleSubmit}>
      <TextField
@@ -141,7 +142,7 @@ const {data}=await axios.post(
          
          </form>
     <FormBuilder />
-    </>
+    </>:<p>Unauthorized user</p>
    
   )
 }

@@ -27,13 +27,14 @@ export const Login = () => {
     setemail(input1.email);
     setname(input1.name);
     setpassword(input1.password);
+    if(email){
     try{
       const config={
         headers:{
           "Content-type":"application/json"
         }
       }
-    
+   
 const {data}=await axios.post(
   "http://localhost:8080/user/login",
   {
@@ -43,7 +44,8 @@ const {data}=await axios.post(
   config
 );
       console.log(data);
-      localStorage.setItem('userInfo',JSON.stringify(data))
+      localStorage.setItem('userInfo',data)
+      localStorage.setItem("email",email)
       if(data==="Authenticated")
       {
       
@@ -53,10 +55,12 @@ const {data}=await axios.post(
     }catch(error){
       
     }
-
+  }
   
   if(isSignup)
   {
+    if(email)
+    {
     try{
       const config={
         headers:{
@@ -81,6 +85,7 @@ const {data}=await axios.post(
           
         }
       }
+    }
   }
   
   return (

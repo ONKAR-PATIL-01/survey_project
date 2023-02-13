@@ -14,6 +14,7 @@ function App() {
    <Routes>
       <Route path='/' element={<Home/>}></Route>
       <Route path='login' element={<Login/>}></Route>
+      
       <Route path='Dashboard' element={<Dashboard/>}></Route>
       <Route path='dnd' element={<DragAndDrop/>}></Route>
       <Route path='dynamicform/:id' element={<DynamicFom/>}></Route>
