@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom'
 import { Box, Button, TextField, Typography } from "@mui/material";
-export const Login = () => {
+export const Login = ({setnavshow}) => {
   const [isSignup, setisSignup] = useState(false);
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
@@ -45,6 +45,7 @@ const {data}=await axios.post(
 );
       console.log(data);
       localStorage.setItem('userInfo',data)
+      setnavshow(true);
       localStorage.setItem("email",email)
       if(data==="Authenticated")
       {
@@ -78,8 +79,9 @@ const {data}=await axios.post(
     );
 
           console.log(data);
-          localStorage.setItem('userInfo',JSON.stringify(data))
-        
+
+          localStorage.setItem('userInfo',"Authenticated")
+           setnavshow(true);
         
         }catch(error){
           

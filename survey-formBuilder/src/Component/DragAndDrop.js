@@ -1,27 +1,9 @@
-// import React from 'react'
-// import "survey-core/defaultV2.min.css";
-// import "survey-creator-core/survey-creator-core.min.css";
-// import {Model} from 'survey-core'
-// import { SurveyCreator,SurveyCreatorComponent } from "survey-creator-react";
-// export const DragAndDrop = () => {
-//     const creatorOptions = {
-//         showDesignTab:true,
-//         showLogicTab: true,
-//         isAutoSave: true
-
-//       };
-//     const survey=new Model();
-//     const creator = new SurveyCreator(creatorOptions);
-//     survey.onComplete.add((sender, options) => {console.log(JSON.stringify(sender.data, null, 3));});
-//     return <SurveyCreatorComponent creator={creator} />;
- 
-// }
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import $ from "jquery"; //Load jquery
 
-import React, { Component, createRef, useState } from "react"; //For react component
+import React, {  useState } from "react"; //For react component
 window.jQuery = $; //JQuery alias
 window.$ = $; //JQuery alias
 
@@ -63,6 +45,7 @@ var options = {
       ],
       disableFields: ['autocomplete',
       'button',
+      'select',
       'header',
       'hidden',
       'paragraph',
@@ -72,25 +55,24 @@ var options = {
     ]
 
   };
-//Initialize formBuilder 
-$(function(){
-  // $('#fb-editor').hide();
-  $('#fb-editor').children().children().hide();
-})
-class FormBuilder extends Component {
-  fb = createRef();
+  $($ => {
+    $('.build-wrap').formBuilder(options)
+  })
+// class FormBuilder extends Component {
+//   fb = createRef();
    
-  componentDidMount() {
-    $(this.fb.current).formBuilder(options);
-   
-  }
- 
- 
-  render() {
+//   componentDidMount() {
+//     // $('#editor :nth-child(0)').hide();
+//     $(this.fb.current).formBuilder(options);
     
-    return <div id="fb-editor" ref={this.fb} />;
-  }
-}
+//   }
+ 
+ 
+//   render() {
+    
+//     return <div id="editor" ref={this.fb} />;
+//   }
+// }
 
 export const DragAndDrop = () => {
      const [email,setemail]=useState("");
@@ -135,7 +117,7 @@ const {data}=await axios.post(
     }catch(error){
       
     }
-
+  
   } 
   
   return (
@@ -181,10 +163,12 @@ const {data}=await axios.post(
           </Button>
          
          </form>
-         
-    <FormBuilder />
+         <div class="build-wrap"></div>
+     {/* <FormBuilder/> */}
     </>:<p>Unauthorized user</p>
    
   )
 }
+
+
 

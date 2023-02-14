@@ -1,4 +1,4 @@
-import { TextareaAutosize, TextField, InputLabel, Button, Select, RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import { TextareaAutosize, TextField, InputLabel, Button, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Stack from '@mui/material/Stack';
 
@@ -6,39 +6,39 @@ import axios from 'axios';
 
 
 export const DynamicFom = () => {
-    
-    var response = [];
-    const[formData,setFormData]=useState();
-    // const formData = location.state.id;
-    
 
-   useEffect(()=>{
-    const id=(window.location.href).split('/')[4];
-    const fun =async()=> {
-        try {
-            const config = {
-              headers: {
-                "Content-type": "application/json"
-              }
+    var response = [];
+    const [formData, setFormData] = useState();
+    // const formData = location.state.id;
+
+
+    useEffect(() => {
+        const id = (window.location.href).split('/')[4];
+        const fun = async () => {
+            try {
+                const config = {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                }
+
+                const { data } = await axios.get(
+                    `http://localhost:2000/api/form/form/id/${id}`, config
+
+                );
+
+                //  data1=JSON.stringify(data[0],null,3);
+                //  console.log(JSON.stringify(data1[0]));
+                console.log(data.surveys);
+
+                setFormData(data);
+                console.log(data.surveys);
+            } catch (error) {
+
             }
-      
-            const { data } = await axios.get(
-              `http://localhost:2000/api/form/form/id/${id}`, config
-      
-            );
-      
-            //  data1=JSON.stringify(data[0],null,3);
-            //  console.log(JSON.stringify(data1[0]));
-            console.log(data.surveys);
-           
-            setFormData(data);
-            console.log(data.surveys);
-          } catch (error) {
-      
-          }
-    }
-    fun();
-   },[])
+        }
+        fun();
+    }, [])
     const [formState, setFormState] = useState({});
     const handleChange = event => {
         setFormState({
@@ -79,7 +79,7 @@ export const DynamicFom = () => {
 
     //   },[setFormState])
     return (
-        <form style={{ alignItems: 'center', margin: 'auto',marginTop:'25px' ,padding:'10px'}} onSubmit={handleSubmit}>
+        <form style={{ alignItems: 'center', margin: 'auto', marginTop: '25px', padding: '10px' }} onSubmit={handleSubmit}>
 
             {/* <InputLabel>Iauro's Auto Generated form {JSON.stringify(location.state.id.surveys.title)}</InputLabel> */}
 
@@ -97,7 +97,7 @@ export const DynamicFom = () => {
                             required={field.required}
                         />
                     )}
-                 
+
                     {field.type === "textarea" && (
                         <TextareaAutosize
                             id={field.label}
@@ -108,8 +108,8 @@ export const DynamicFom = () => {
                             required={field.required}
                         />
                     )}
-                  
-               
+
+
                     {field.type === "date" && (
                         <Stack component="form" noValidate spacing={3}>
                             <TextField
@@ -139,7 +139,7 @@ export const DynamicFom = () => {
                             required={field.required}
                         />
                     )}
-                 
+
                     {field.type === "number" && (
                         <TextField
                             type="number"
@@ -151,7 +151,7 @@ export const DynamicFom = () => {
                             required={field.required}
                         />
                     )}
-                 
+
                     {field.type === "checkbox-group" && (
 
 
@@ -169,40 +169,40 @@ export const DynamicFom = () => {
                             ))}
                         </InputLabel>
                     )}
-                    {field.type === "radio-group" && (
+                    {field.type === "radio-group" && (                      
+                        <RadioGroup
+                        >
+
+                            {field.values.map((answer, answerIndex) => (
+                               
+                               <FormControlLabel value={answer.value} control={<Radio />} label={answer.label}    onChange={handleChange}
+                               />
+                            ))}
+                        </RadioGroup>
+                    )}
+                    {/* {field.type === "radio-group" && (
 
 
-                        <RadioGroup id={field.label}
-                            name={field.label}
-                            onChange={handleChange}
-                            defaultChecked={'false'}
-                            value={formState[field.label] || ""}
+                        <RadioGroup 
+                        id={field.label}
+                        name={field.label}
+                        
+                        onChange={handleChange}
+                        value={formState[field.label] || ""}
+                        
                         >
 
                             {field.values.map((answer, answerIndex) => (
                                 <>
                                     <InputLabel>{answer.value}</InputLabel>
-                                    <FormControlLabel control={<Radio />} value={formState[field.label] || ""} onChange={handleChange} ></FormControlLabel>
+                                    <FormControlLabel control={<Radio />}  value={formState[field.label] || ""} onChange={handleChange}></FormControlLabel>
                                 </>
 
                             ))}
                         </RadioGroup>
 
-                    )}
-                    {field.type === "select" && (
+                    )} */}
 
-
-                        <Select id={field.label}
-                            name={field.label}
-                            onChange={handleChange}
-                            value={formState[field.label] || ""}
-                        >
-
-                            {field.values.map((answer, answerIndex) => (
-                                <InputLabel>{answer.value}</InputLabel>
-                            ))}
-                        </Select>
-                    )}
                 </div>
             ))}
             <Button style={{
