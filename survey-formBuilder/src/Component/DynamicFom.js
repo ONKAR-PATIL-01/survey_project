@@ -79,7 +79,7 @@ export const DynamicFom = () => {
 
     //   },[setFormState])
     return (
-        <form style={{ alignItems: 'center', margin: 'auto', marginLeft: '40%' }} onSubmit={handleSubmit}>
+        <form style={{ alignItems: 'center', margin: 'auto',marginTop:'25px' ,padding:'10px'}} onSubmit={handleSubmit}>
 
             {/* <InputLabel>Iauro's Auto Generated form {JSON.stringify(location.state.id.surveys.title)}</InputLabel> */}
 
@@ -91,53 +91,31 @@ export const DynamicFom = () => {
                             type="text"
                             id={field.label}
                             name={field.label}
+                            placeholder={field.placeholder}
                             onChange={handleChange}
                             value={formState[field.label] || ""}
                             required={field.required}
                         />
                     )}
-                    {field.type === "email" && (
-                        <TextField
-                            type="email"
-                            id={field.label}
-                            name={field.label}
-                            onChange={handleChange}
-                            value={formState[field.label] || ""}
-                            required={field.required}
-                        />
-                    )}
+                 
                     {field.type === "textarea" && (
                         <TextareaAutosize
                             id={field.label}
                             name={field.label}
+                            placeholder={field.placeholder}
                             onChange={handleChange}
                             value={formState[field.label] || ""}
                             required={field.required}
                         />
                     )}
-                    {field.type === "autocomplete" && (
-                        <TextField
-                            id={field.label}
-                            name={field.label}
-                            onChange={handleChange}
-                            value={formState[field.label] || ""}
-                            required={field.required}
-                        />
-                    )}
-                    {field.type === "button" && (
-                        <Button
-                            id={field.label}
-                            name={field.label}
-                            onChange={handleChange}
-                            value={formState[field.label] || ""}
-                            required={field.required}
-                        >Submit</Button>
-                    )}
+                  
+               
                     {field.type === "date" && (
                         <Stack component="form" noValidate spacing={3}>
                             <TextField
                                 id={field.label}
                                 label={field.label}
+                                placeholder={field.placeholder}
                                 type="date"
                                 defaultValue="2017-05-24"
                                 sx={{ width: 220 }}
@@ -155,41 +133,25 @@ export const DynamicFom = () => {
                             type="file"
                             id={field.label}
                             name={field.label}
+                            placeholder={field.placeholder}
                             onChange={handleChange}
                             value={formState[field.label] || ""}
                             required={field.required}
                         />
                     )}
-                    {field.type === "header" && (
-                        <header
-
-                            id={field.label}
-                            name={field.label}
-                            onChange={handleChange}
-                            value={formState[field.label] || ""}
-                            required={field.required}
-                        ></header>
-                    )}
+                 
                     {field.type === "number" && (
                         <TextField
                             type="number"
                             id={field.label}
                             name={field.label}
+                            placeholder={field.placeholder}
                             onChange={handleChange}
                             value={formState[field.label] || ""}
                             required={field.required}
                         />
                     )}
-                    {field.type === "paragraph" && (
-                        <p
-
-                            id={field.label}
-                            name={field.label}
-                            onChange={handleChange}
-                            value={formState[field.label] || ""}
-                            required={field.required}
-                        />
-                    )}
+                 
                     {field.type === "checkbox-group" && (
 
 
@@ -213,6 +175,7 @@ export const DynamicFom = () => {
                         <RadioGroup id={field.label}
                             name={field.label}
                             onChange={handleChange}
+                            defaultChecked={'false'}
                             value={formState[field.label] || ""}
                         >
 
@@ -248,7 +211,7 @@ export const DynamicFom = () => {
                 color: 'aqua',
                 fontWeight: 'bold',
                 marginTop: '20px',
-                marginLeft: '10%',
+                marginLeft: '45%',
                 fontSize: "18px",
             }} type="submit">Submit</Button>
         </form>

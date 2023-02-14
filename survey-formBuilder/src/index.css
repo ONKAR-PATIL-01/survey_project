@@ -17,13 +17,18 @@ body {
   color: rgb(237, 245, 245);
   background-color: #fff;
 
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .toolbar a{
   margin-right: 42px;
   color: rgb(1, 35, 57);
   font-weight: bold;
+  
+}
+#fb-editor{
+  
+ 
 }
 .toolbar a.active{
   text-decoration: none;

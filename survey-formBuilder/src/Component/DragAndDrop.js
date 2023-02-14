@@ -24,11 +24,13 @@ import $ from "jquery"; //Load jquery
 import React, { Component, createRef, useState } from "react"; //For react component
 window.jQuery = $; //JQuery alias
 window.$ = $; //JQuery alias
+
 require("jquery-ui-sortable"); //For FormBuilder Element Drag and Drop
 require("formBuilder");// For FormBuilder
 require('formBuilder/dist/form-render.min.js')
 document.body.style.margin = "30px"; //For add margin in HTML body
 var surveys
+
 var options = {
     controlPosition: 'left',
     onSave: function(evt, formData) {
@@ -37,20 +39,55 @@ var options = {
        
         window.sessionStorage.setItem('formData', JSON.stringify(formData));
       
-      }
+      },
+      disabledAttrs: [
+        'access',
+        'className',
+        'description',
+        'inline',
+        'max',
+  'maxlength',
+  'min',
+  'multiple',
+  'name',
+
+  'other',
+  'required',
+  'rows',
+  'step',
+  'style',
+  'subtype',
+  'toggle',
+  'value'
+        
+      ],
+      disableFields: ['autocomplete',
+      'button',
+      'header',
+      'hidden',
+      'paragraph',
+      'startRating',
+      
+
+    ]
 
   };
 //Initialize formBuilder 
+$(function(){
+  // $('#fb-editor').hide();
+  $('#fb-editor').children().children().hide();
+})
 class FormBuilder extends Component {
   fb = createRef();
- 
+   
   componentDidMount() {
     $(this.fb.current).formBuilder(options);
-
+   
   }
  
  
   render() {
+    
     return <div id="fb-editor" ref={this.fb} />;
   }
 }
@@ -59,9 +96,10 @@ export const DragAndDrop = () => {
      const [email,setemail]=useState("");
      const[title,setTitle]=useState("")
      const [input1, setinput1] = useState({
-      name: "",
+      title: "",
       email: "",
     });
+    
     const handlechange=(e)=>{
        setinput1((prevState)=>({
         ...prevState,
@@ -72,9 +110,9 @@ export const DragAndDrop = () => {
    
     const  handleSubmit =async(e)=>{
       e.preventDefault();
-      setemail(input1.email);
+      setemail(localStorage.getItem("email"));
       setTitle(input1.title);
-      
+      if(title)
       try{
         const config={
           headers:{
@@ -98,16 +136,17 @@ const {data}=await axios.post(
       
     }
 
-  }  
+  } 
+  
   return (
     localStorage.getItem("userInfo")==="Authenticated"?
     <>
-    <form style={{marginBottom:'20px'}}  onSubmit={handleSubmit}>
+    <form style={{marginBottom:'20px',marginTop:'20px'}}  onSubmit={handleSubmit}>
      <TextField
-          onChange={handlechange}
+          // onChange={handlechange}
           name="email"
-          value={input1.email}
-       
+          value={localStorage.getItem("email")}
+          disabled={true}
           type={"email"}
           variant="outlined"
           placeholder="Email"
@@ -123,6 +162,7 @@ const {data}=await axios.post(
           placeholder="title"
           
         ></TextField>
+       
          <Button 
           type="submit"
             style={{
@@ -141,6 +181,7 @@ const {data}=await axios.post(
           </Button>
          
          </form>
+         
     <FormBuilder />
     </>:<p>Unauthorized user</p>
    
