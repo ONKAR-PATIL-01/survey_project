@@ -2,8 +2,8 @@ import React, { useEffect,useState } from 'react'
 import axios  from "axios";
 import { CSVLink } from 'react-csv';
 import {Button} from '@mui/material'
-// import  csvDownload   from "json-to-csv-export";
-import { JsonToTable } from "react-json-to-table";
+import  JsonTable from "./DataTable";
+
 export const Responses = () => {
     const[response1,setresponse1]=useState([]);
     // const[length,setlength1]=useState(0);
@@ -38,9 +38,9 @@ export const Responses = () => {
    
      
   return (
-   <div >
-    {response1.map((eachRecord, index)=>{ return <JsonToTable json={eachRecord.response} />})}
-    {/* <JsonToTable json={response1}/> */}
+   <div style={{marginTop:'10px'}}>
+    {/* {response1.map((eachRecord, index)=>{ return <JsonTable data={eachRecord.response} />})} */}
+    <JsonTable  data={response1.map((eachRecord,index)=>{return (eachRecord.response[0])})}/>
     
     <div>
     <Button onClick={()=>{document.getElementById("myCheck").click()}}>Download CSV</Button>

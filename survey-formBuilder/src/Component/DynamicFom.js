@@ -40,7 +40,7 @@ export const DynamicFom = () => {
         fun();
     }, [])
     const [formState, setFormState] = useState({});
-    const [checkboxdata,setcheckboxdata]=useState([]);
+    // const [checkboxdata,setcheckboxdata]=useState([]);
     const handleChange1= event =>{
         const demo = formState[event.target.name] ||[]
         console.log('demo', event.target.name, event.target.value, demo)
