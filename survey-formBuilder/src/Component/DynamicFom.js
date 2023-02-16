@@ -42,15 +42,20 @@ export const DynamicFom = () => {
     const [formState, setFormState] = useState({});
     const [checkboxdata,setcheckboxdata]=useState([]);
     const handleChange1= event =>{
-        setcheckboxdata([...checkboxdata,event.target.value])
-    
-        console.log(checkboxdata);
-        setFormState({
-            ...formState,
-            [event.target.name]: [checkboxdata]
-        });
+        const demo = formState[event.target.name] ||[]
+        console.log('demo', event.target.name, event.target.value, demo)
+        event.target.checked===true?demo.push(event.target.value):  delete demo[demo.indexOf(event.target.value)];
+        // setcheckboxdata([...checkboxdata,event.target.value])
+        setFormState({...formState, [event.target.name]:[demo]})
+        // formState && formState[event.target.name] &&setFormState({...formState, [event.target.name]:[...formState?.[event.target.name][0],event.target.value]})
+        // setFormState({
+        //     ...formState,
+        //     [event.target.name]: [checkboxdata]
+          
+        // });
     }
     
+    console.log('123',formState)
     const handleChange = event => {
         setFormState({
             ...formState,
@@ -79,13 +84,14 @@ export const DynamicFom = () => {
                 config
             );
             console.log(data);
+            setFormData({})
 
 
         } catch (error) {
 
         }
 
-
+      window.alert("You Have Successfully Submitted The Survey....")
     };
     //   useEffect(()=>{
 
