@@ -1,4 +1,4 @@
-import { TextareaAutosize, TextField, InputLabel, Button, RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import { TextareaAutosize, TextField, InputLabel, Button, RadioGroup, FormControlLabel, Radio, FormGroup } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Stack from '@mui/material/Stack';
 
@@ -40,6 +40,17 @@ export const DynamicFom = () => {
         fun();
     }, [])
     const [formState, setFormState] = useState({});
+    const [checkboxdata,setcheckboxdata]=useState([]);
+    const handleChange1= event =>{
+        setcheckboxdata([...checkboxdata,event.target.value])
+    
+        console.log(checkboxdata);
+        setFormState({
+            ...formState,
+            [event.target.name]: [checkboxdata]
+        });
+    }
+    
     const handleChange = event => {
         setFormState({
             ...formState,
@@ -51,7 +62,7 @@ export const DynamicFom = () => {
         event.preventDefault();
         response.push(formState);
         console.log(response);
-
+        const formId = (window.location.href).split('/')[4];
         try {
             const config = {
                 headers: {
@@ -62,6 +73,7 @@ export const DynamicFom = () => {
             const { data } = await axios.post(
                 "http://localhost:2000/api/form/addresponse",
                 {
+                    formId,
                     response
                 },
                 config
@@ -114,7 +126,7 @@ export const DynamicFom = () => {
                         <Stack component="form" noValidate spacing={3}>
                             <TextField
                                 id={field.label}
-                                label={field.label}
+                                name={field.label}
                                 placeholder={field.placeholder}
                                 type="date"
                                 defaultValue="2017-05-24"
@@ -122,8 +134,8 @@ export const DynamicFom = () => {
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
-                                onChange={handleChange}
                                 value={formState[field.label] || ""}
+                               
                                 required={field.required}
                             />
                         </Stack>
@@ -155,22 +167,28 @@ export const DynamicFom = () => {
                     {field.type === "checkbox-group" && (
 
 
-                        <InputLabel id={field.label}
-                            name={field.label}
-                            onChange={handleChange}
-                            value={formState[field.label] || ""}
+                        <FormGroup
+                        id={field.label}
+                        name={field.label}
+                        // onChange={handleChange}
+                        // value={formState[field.label] || ""}
                         >
 
                             {field.values.map((answer, answerIndex) => (
                                 <>
-                                    <InputLabel>{answer.value}</InputLabel>
-                                    <TextField name={answer.value} type='checkbox' value={formState[field.label] || ""} onChange={handleChange}></TextField>
+                                    <InputLabel>{answer.label}</InputLabel>
+                                    <TextField name={field.label} type='checkbox' value={answer.label} onChange={handleChange1}></TextField>
                                 </>
                             ))}
-                        </InputLabel>
+                        </FormGroup>
                     )}
                     {field.type === "radio-group" && (                      
                         <RadioGroup
+                        id={field.label}
+                        name={field.label}
+                        
+                        onChange={handleChange}
+                        value={formState[field.label] || ""}
                         >
 
                             {field.values.map((answer, answerIndex) => (

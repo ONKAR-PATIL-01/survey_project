@@ -6,6 +6,7 @@ import { Dashboard } from './Component/Dashboard';
 import  {useState} from "react";
 import { DragAndDrop } from './Component/DragAndDrop';
 import { DynamicFom } from './Component/DynamicFom';
+import { Responses } from './Component/Responses';
 
 function App() {
   const[navshow,setnavshow]=useState(localStorage.getItem("userInfo")==="Authenticated");
@@ -19,6 +20,7 @@ function App() {
       <Route path='Dashboard' element={<Dashboard/>}></Route>
       <Route path='dnd' element={<DragAndDrop/>}></Route>
       <Route path='dynamicform/:id' element={<DynamicFom/>}></Route>
+      <Route path='responses/:id' element={<Responses/>}></Route>
    </Routes>
    </>
   );

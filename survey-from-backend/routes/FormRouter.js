@@ -8,7 +8,7 @@ router.route("/form/id/:_id").get(getFormById)
 router.route("/addresponse").post(submitResponse)
 // router.route("/email/:email").get(getAllFormsOfUser)
 
-// router.route("/getresponse/:formId").get(getResponse)
+router.route("/getresponse/:formId").get(getResponse)
 
 
 

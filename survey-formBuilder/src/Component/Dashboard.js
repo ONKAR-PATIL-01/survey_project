@@ -14,7 +14,7 @@ export const Dashboard = () => {
   const [email, setemail] = useState("");
   const [data1, setdata1] = useState("");
   const [length1, setlength1] = useState(0);
-
+  
 
   useEffect(() => {
     setemail(localStorage.getItem("email"));
@@ -71,7 +71,7 @@ export const Dashboard = () => {
               color: '#fff',
               fontWeight: 'bold',
               marginTop: '8px',
-              marginLeft: '80%',
+              marginLeft: '90%',
 
 
             }}
@@ -94,7 +94,7 @@ export const Dashboard = () => {
               for (let i = 0; i < length1; i++) {
                 post.push(
 
-                  <Card onClick={() => navigate(`/dynamicform/${data1[i]._id}`, { state: { id: data1[i] } })} sx={{ maxWidth: 345, borderRadius: '30px', display: "flex", flexWrap: "wrap", marginRight: '20px', marginBottom: '10px' }}>
+                  <Card  sx={{ maxWidth: 345, borderRadius: '30px', display: "flex", flexWrap: "wrap", marginRight: '20px', marginBottom: '10px' }}>
                     <CardMedia
                       component="img"
                       image={require("./io.jpeg")}
@@ -109,9 +109,9 @@ export const Dashboard = () => {
 
                     </CardContent>
                     <CardActions>
-                      <Button size="small" onClick={() => { navigator.clipboard.writeText(`http://192.168.152.19:3000/dynamicform/${data1[i]._id}`) }}
+                      <Button size="small" onClick={() => { navigator.clipboard.writeText(`http://localhost:3000/dynamicform/${data1[i]._id}`) }}
                       >Share</Button>
-                      <Button size="small">responses</Button>
+                      <Button size="small" onClick={ ()=>{navigate(`/responses/${data1[i]._id}`)}}>responses</Button>
                     </CardActions>
                   </Card>
 
@@ -126,10 +126,4 @@ export const Dashboard = () => {
       </> : <p>Unauthorized User</p>
   )
 }
-// import React from 'react'
 
-// export const Dashboard = () => {
-//   return (
-//     <div>Dashboard</div>
-//   )
-// }

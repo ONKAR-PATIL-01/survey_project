@@ -168,13 +168,14 @@ module.exports = {
     submitResponse: async (req, res) => {
         try {
             var data = {
-                response: req.body
+                formId:req.body.formId,
+                response: req.body.response
             }
           
 
 
             if (true) {
-                var newResponse = new ResponseModel(req.body)
+                var newResponse = new ResponseModel(data)
                 // console.log(newResponse);
 
                 await newResponse.save().then((docs) => {
@@ -199,19 +200,20 @@ module.exports = {
     //         res.send(e);
     //     }
     // },
+,
+    getResponse: async (req, res) => {
+        try {
+            var formId = req.params.formId;
+            //   console.log(formId);
+      
+            await ResponseModel.find({ formId: formId }).then(async (responses) => {
+                
+                res.status(200).json(responses)
+            })
 
-    // getResponse: async (req, res) => {
-    //     try {
-    //         var formId = req.params.formId;
-    //         //   console.log(formId);
-
-    //         await ResponseModel.find({ formId: formId }).then(async (responses) => {
-    //             res.status(200).json(responses)
-    //         })
-
-    //     } catch (error) {
-    //         res.send(error)
-    //     }
-    // }
+        } catch (error) {
+            res.send(error)
+        }
+    }
 
 }
