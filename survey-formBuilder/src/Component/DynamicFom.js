@@ -238,6 +238,7 @@ export const DynamicFom = () => {
                 marginLeft: '45%',
                 fontSize: "18px",
             }} type="submit">Submit</Button>
+
         </form>
     );
 }

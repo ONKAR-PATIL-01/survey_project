@@ -29,6 +29,7 @@ export const Home = ()  => {
   });
     
   return (
+    <>
     <div style={{
       textAlign: 'center',
       marginTop: '5%'
@@ -39,6 +40,10 @@ export const Home = ()  => {
       <br />
       <br />
       <animated.h1 style={animationProps}>Welcome to Iauro Systems!</animated.h1>
+      
+     
     </div>
+   
+    </>
   );
 }

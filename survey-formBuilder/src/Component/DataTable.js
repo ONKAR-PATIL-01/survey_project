@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 
 const useStyles = makeStyles({
+
   tableCell: {
     width: '25%'
   }

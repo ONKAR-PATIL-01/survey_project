@@ -2,7 +2,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import $ from "jquery"; //Load jquery
-
+import SurveyTour1 from "./SurveyTour1";
 import React, {  useState } from "react"; //For react component
 window.jQuery = $; //JQuery alias
 window.$ = $; //JQuery alias
@@ -165,6 +165,7 @@ const {data}=await axios.post(
          </form>
          <div class="build-wrap"></div>
      {/* <FormBuilder/> */}
+     <SurveyTour1/>
     </>:<p>Unauthorized user</p>
    
   )

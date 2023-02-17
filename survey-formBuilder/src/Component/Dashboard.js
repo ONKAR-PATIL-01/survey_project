@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import SurveyTour from './SurveyTour'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -71,8 +72,7 @@ export const Dashboard = () => {
               color: '#fff',
               fontWeight: 'bold',
               marginTop: '8px',
-              marginLeft: '90%',
-
+              float:'right'
 
             }}
             variant="contained"
@@ -82,7 +82,7 @@ export const Dashboard = () => {
           </Button>
 
         </form>
-        <div style={{ display: "flex", flexWrap: "wrap", padding: '5px', margin: 'auto' }}>
+        <div style={{ display: "flex", flexWrap: "wrap", padding: '5px', margin: 'auto', marginTop:'60px'}}>
           {
             // data1.map(data=>{
             //   <Button>{data}</Button>
@@ -94,12 +94,12 @@ export const Dashboard = () => {
               for (let i = 0; i < length1; i++) {
                 post.push(
 
-                  <Card  sx={{ maxWidth: 345, borderRadius: '30px', display: "flex", flexWrap: "wrap", marginRight: '20px', marginBottom: '10px' }}>
+                  <Card  sx={{ maxWidth: 250, borderRadius: '30px', display: "flex", flexWrap: "wrap", marginRight: '20px', marginBottom: '10px' , boxShadow:'5px' }}>
                     <CardMedia
                       component="img"
                       image={require("./io.jpeg")}
                       alt="logo"
-                      height="140"
+                      height="100"
 
                     />
                     <CardContent>
@@ -122,7 +122,7 @@ export const Dashboard = () => {
             })()
           }
         </div>
-
+       <SurveyTour/>
       </> : <p>Unauthorized User</p>
   )
 }
