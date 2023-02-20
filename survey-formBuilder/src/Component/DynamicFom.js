@@ -97,15 +97,16 @@ export const DynamicFom = () => {
 
     //   },[setFormState])
     return (
-        <form style={{ alignItems: 'center', margin: 'auto', marginTop: '25px', padding: '10px' }} onSubmit={handleSubmit}>
+        <form style={{width:'80%',background:'#fff',color:'#000', alignItems: 'center', margin: 'auto', marginTop: '25px', padding: '10px' }} onSubmit={handleSubmit}>
 
             {/* <InputLabel>Iauro's Auto Generated form {JSON.stringify(location.state.id.surveys.title)}</InputLabel> */}
 
             {formData?.surveys?.map(field => (
                 <div key={field.label}>
-                    <InputLabel htmlFor={field.label}>{field.label}</InputLabel>
+                    <InputLabel style={{width:'80%',color:'#000',fontSize:'20px'}} htmlFor={field.label}>{field.label}</InputLabel>
                     {field.type === "text" && (
                         <TextField
+                            style={{width:'100%',color:'#000'}}
                             type="text"
                             id={field.label}
                             name={field.label}
@@ -118,6 +119,7 @@ export const DynamicFom = () => {
 
                     {field.type === "textarea" && (
                         <TextareaAutosize
+                            style={{width:'100%',height:'80px'}}
                             id={field.label}
                             name={field.label}
                             placeholder={field.placeholder}
@@ -131,6 +133,7 @@ export const DynamicFom = () => {
                     {field.type === "date" && (
                         <Stack component="form" noValidate spacing={3}>
                             <TextField
+                                style={{width:'100%'}}
                                 id={field.label}
                                 name={field.label}
                                 placeholder={field.placeholder}
@@ -140,6 +143,7 @@ export const DynamicFom = () => {
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
+                                onChange={handleChange}
                                 value={formState[field.label] || ""}
                                
                                 required={field.required}
@@ -148,6 +152,7 @@ export const DynamicFom = () => {
                     )}
                     {field.type === "file" && (
                         <TextField
+                            style={{width:'100%'}}
                             type="file"
                             id={field.label}
                             name={field.label}
@@ -160,6 +165,7 @@ export const DynamicFom = () => {
 
                     {field.type === "number" && (
                         <TextField
+                            style={{width:'100%'}}
                             type="number"
                             id={field.label}
                             name={field.label}
@@ -174,6 +180,7 @@ export const DynamicFom = () => {
 
 
                         <FormGroup
+                        style={{width:'100%'}}
                         id={field.label}
                         name={field.label}
                         // onChange={handleChange}
@@ -190,6 +197,7 @@ export const DynamicFom = () => {
                     )}
                     {field.type === "radio-group" && (                      
                         <RadioGroup
+                        style={{width:'100%'}}
                         id={field.label}
                         name={field.label}
                         
@@ -230,14 +238,14 @@ export const DynamicFom = () => {
                 </div>
             ))}
             <Button style={{
+           
                 borderRadius: 35,
-                backgroundColor: "#000",
-                color: 'aqua',
+              
                 fontWeight: 'bold',
                 marginTop: '20px',
                 marginLeft: '45%',
                 fontSize: "18px",
-            }} type="submit">Submit</Button>
+            }} variant="contained" type="submit">Submit</Button>
 
         </form>
     );

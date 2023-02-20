@@ -99,7 +99,7 @@ export const Dashboard = () => {
                       component="img"
                       image={require("./io.jpeg")}
                       alt="logo"
-                      height="100"
+                      height="80"
 
                     />
                     <CardContent>

@@ -32,14 +32,15 @@ export const Home = ()  => {
     <>
     <div style={{
       textAlign: 'center',
-      marginTop: '5%'
+      marginTop: '5%',
+  
     }}>
        <img style={{ borderRadius: '50%' }} src={logo} alt="Logo" />
      
      
       <br />
       <br />
-      <animated.h1 style={animationProps}>Welcome to Iauro Systems!</animated.h1>
+      <animated.h1 style={animationProps}>Welcome to Survey Systems!</animated.h1>
       
      
     </div>
