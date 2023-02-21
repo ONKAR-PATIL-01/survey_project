@@ -97,7 +97,7 @@ export const DynamicFom = () => {
 
     //   },[setFormState])
     return (
-        <form style={{width:'80%',background:'#fff',color:'#000', alignItems: 'center', margin: 'auto', marginTop: '25px', padding: '10px' }} onSubmit={handleSubmit}>
+        <form style={{width:'80%',background:'#fff',color:'#000', alignItems: 'center', margin: 'auto', marginTop: '25px', padding: '10px',border:'2px',borderStyle:'dashed'}} onSubmit={handleSubmit}>
 
             {/* <InputLabel>Iauro's Auto Generated form {JSON.stringify(location.state.id.surveys.title)}</InputLabel> */}
 

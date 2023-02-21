@@ -7,11 +7,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-image: url('./b5.jpg');
+  background-image: url('../src/b6.jpeg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
+
 .dash{
   align-items: center;
   

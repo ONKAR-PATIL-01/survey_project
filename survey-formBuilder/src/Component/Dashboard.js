@@ -81,7 +81,7 @@ export const Dashboard = () => {
 
           </Button>
 
-        </form>
+        </form >
         <div style={{ display: "flex", flexWrap: "wrap", padding: '5px', margin: 'auto', marginTop:'60px'}}>
           {
             // data1.map(data=>{
